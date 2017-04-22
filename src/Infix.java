@@ -3,7 +3,7 @@ import java.util.Stack;
 public class Infix {
 	char ch, topOp;
 	Stack temp = new Stack();
-	String result;
+	String result = "";
 	
 	int precede(char op) {
 		switch (op) {
@@ -12,10 +12,10 @@ public class Infix {
 			return 0;
 		case '+':
 		case '-':
-			return 0;
+			return 1;
 		case '*':
 		case '/':
-			return 0;
+			return 2;
 		}
 		return -1;
 	}
@@ -41,7 +41,6 @@ public class Infix {
 				topOp = temp.pop().toString().charAt(0);
 				while (topOp != '(') {
 					result += topOp;
-					System.out.println(result);
 					topOp = temp.pop().toString().charAt(0);
 				}
 				break;
@@ -50,9 +49,9 @@ public class Infix {
 				break;
 			}
 			
-			while (temp.isEmpty()) {
-				result += temp.pop().toString();
-			}
+		}
+		while (!temp.isEmpty()) {
+			result += temp.pop().toString();
 		}
 	}
 	
